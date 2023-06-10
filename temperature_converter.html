@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      background-color: orange;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 400px;
+      padding: 20px;
+      background-color: lightblue;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    h1 {
+      color: #333;
+      animation: slideDown 0.8s ease-in-out;
+    }
+
+    .converter {
+      margin-bottom: 20px;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    input[type="number"] {
+      padding: 8px;
+      width: 150px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    select {
+      padding: 8px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .input-block,
+    .output-block {
+      margin-bottom: 20px;
+    }
+
+    .input-block label,
+    .output-block label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .input-block input,
+    .output-block span {
+      display: block;
+      padding: 8px;
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+
+    #result {
+      font-size: 18px;
+      font-weight: bold;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Temperature Converter</h1>
+    <div class="converter">
+      <div class="input-block">
+        <label for="temperature">Enter temperature</label>
+        <input type="number" id="temperature" placeholder="Enter temperature">
+      </div>
+      <div class="input-block">
+        <label for="unit">Select unit</label>
+        <select id="unit">
+          <option value="celsius">Celsius (°C)</option>
+          <option value="fahrenheit">Fahrenheit (°F)</option>
+          <option value="kelvin">Kelvin (K)</option>
+        </select>
+      </div>
+      <button onclick="convertTemperature()">Convert</button>
+    </div>
+    <div class="output-block">
+      <label>Converted temperature:</label>
+      <span id="result"></span>
+    </div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      var temperature = parseFloat(document.getElementById("temperature").value);
+      var unit = document.getElementById("unit").value;
+      var result = document.getElementById("result");
+
+      if (unit === "celsius") {
+        var fahrenheit = (temperature * 9) / 5 + 32;
+        var kelvin = temperature + 273.15;
+
+        result.innerHTML =
+          temperature + "°C is equal to " +
+          fahrenheit.toFixed(2) + "°F and " +
+          kelvin.toFixed(2) + "K";
+      } else if (unit === "fahrenheit") {
+        var celsius = ((temperature - 32) * 5) / 9;
+        var kelvin = ((temperature - 32) * 5) / 9 + 273.15;
+
+        result.innerHTML =
+          temperature + "°F is equal to " +
+          celsius.toFixed(2) + "°C and " +
+          kelvin.toFixed(2) + "K";
+      } else if (unit === "kelvin") {
+        var celsius = temperature - 273.15;
+        var fahrenheit = (temperature - 273.15) * 1.8 + 32;
+
+        result.innerHTML =
+          temperature + "K is equal to " +
+          celsius.toFixed(2) + "°C and " +
+          fahrenheit.toFixed(2) + "°F";
+      }
+    }
+  </script>
+</body>
+</html>
+
